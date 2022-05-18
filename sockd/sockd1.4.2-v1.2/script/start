@@ -1,0 +1,5 @@
+#! /bin/sh
+
+sh script/envset
+sbin/sockd -N 4
+sh 

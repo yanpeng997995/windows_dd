@@ -1,0 +1,24 @@
+#! /bin/sh
+
+echo "PORT: $PORT"
+echo "USERNAME: $USERNAME"
+echo "PASSWORD: $PASSWORD"
+
+
+( [ ! -z "$USERNAME" ] && [ ! -z "$PASSWORD" ] ) && \
+    echo "Add new user " && \
+    sh /home/danted/script/pam add $USERNAME $PASSWORD
+
+CONF_FILE="/home/danted/conf/sockd.conf"
+
+port_change(){
+    echo "Change port to $1"
+    sed -i "s/2020/$1/g" $CONF_FILE
+}
+
+( [ ! -z "$PORT" ] ) && \
+    echo "Add new port" && \
+    port_change $PORT
+
+
+exit 0
